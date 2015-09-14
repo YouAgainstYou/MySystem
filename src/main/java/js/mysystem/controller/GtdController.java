@@ -18,13 +18,13 @@ public class GtdController {
 	@Autowired
 	TaskDao taskDao;
 	
-	
+	 
 	@RequestMapping(value="/listTasks")
 	public String listTasks(HttpSession session) {
 		List<Task> list = taskDao.readTasks();
 		
 		session.setAttribute("tasks", list);
-		
+		System.out.println("Hello Jens :-)");
 		
 		return "listTasks";
 	}
