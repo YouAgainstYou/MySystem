@@ -1,0 +1,10 @@
+js\mysystem\model\daos\CardDao.class
+js\mysystem\model\service\KnowledgeService.class
+js\mysystem\model\entities\Deck.class
+js\mysystem\controller\TrainingController.class
+js\mysystem\controller\KnowledgeController.class
+js\mysystem\model\entities\TrainingSession.class
+js\mysystem\model\entities\Card.class
+js\mysystem\model\entities\CardType.class
+js\mysystem\model\daos\TrainingSessionDao.class
+js\mysystem\model\daos\DeckDao.class
