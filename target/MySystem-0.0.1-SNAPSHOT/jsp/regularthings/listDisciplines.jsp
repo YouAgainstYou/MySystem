@@ -39,18 +39,18 @@ $(document).ready("filterText").keyup(function(){
 	<input type=text id="filterText" />
 
 	<table>
-		<c:forEach var="habit" items="${habits}">
+		<c:forEach var="discipline" items="${disciplines}">
 			<tr>
-				<td><c:out value="${habit.id}" /></td>
-				<td><c:out value="${habit.description}" /></td>
+				<td><c:out value="${discipline.id}" /></td>
+				<td><c:out value="${discipline.description}" /></td>
 
-				<td><a href="<c:url value='/'/>editHabit">/${habit.id}" class="button">edit</a></td>
-				<td><a href="<c:url value='/'/>deleteHabit">/${habit.id}" class="button">delete</a></td>
+				<td><a href="<c:url value='/'/>editDiscipline">/${discipline.id}" class="button">edit</a></td>
+				<td><a href="<c:url value='/'/>deleteDiscipline">/${discipline.id}" class="button">delete</a></td>
 
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="<c:url value='/'/>addHabit" class="button">new</a>
+	<a href="<c:url value='/'/>addDiscipline" class="button">new</a>
 
 </body>
 </html>
