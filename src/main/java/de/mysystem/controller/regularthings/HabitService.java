@@ -6,6 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import de.mysystem.helpers.Idgenerator;
+
+
+@Service
+@Scope("session")
 public class HabitService {
 	Map<Integer, Habit> habits = new HashMap<Integer, Habit>();
 
@@ -37,9 +45,7 @@ public class HabitService {
 	
 	
 	private int getNextId() {
-		int id = Collections.max(habits.keySet());
-		
-		return id + 1;
+		return Idgenerator.getNextId(habits.keySet());
 	}
 
 

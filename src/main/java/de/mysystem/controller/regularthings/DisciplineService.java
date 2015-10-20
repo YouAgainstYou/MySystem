@@ -6,6 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import de.mysystem.helpers.Idgenerator;
+
+
+
+@Service
+@Scope("session")
 public class DisciplineService {
 	Map<Integer, Discipline> disciplines = new HashMap<Integer, Discipline>();
 	
@@ -34,13 +43,9 @@ public class DisciplineService {
 		disciplines.put(discipline.getId(), discipline);
 	}
 
-
-	
 	
 	private int getNextId() {
-		int id = Collections.max(disciplines.keySet());
-		
-		return id + 1;
+		return Idgenerator.getNextId(disciplines.keySet());
 	}
 
 

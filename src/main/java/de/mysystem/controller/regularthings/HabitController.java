@@ -51,7 +51,7 @@ public class HabitController implements ApplicationContextAware {
 		
 		model.addAttribute("entries", ds.getHabitList());
 		
-		return "gtd/listHabits";
+		return "regularthings/listHabits";
 	}
 
 	@RequestMapping(value="/editHabit/{id}")
@@ -63,7 +63,7 @@ public class HabitController implements ApplicationContextAware {
 		model.addAttribute("habit", habit);
 	
 		
-		return "/gtd/editHabit";
+		return "/regularthings/editHabit";
 	}
 
 	@RequestMapping(value="/updateHabit", method = RequestMethod.POST)

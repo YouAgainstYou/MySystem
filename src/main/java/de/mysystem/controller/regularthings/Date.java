@@ -14,7 +14,7 @@ public class Date {
 	List<ToDo> todos;
 
 	
-	
+	public Date() {};
 	
 	public Date(int id, java.util.Date date, String time, String description) {
 		this.id = id;

@@ -12,6 +12,7 @@ public class TheWork implements JournalEntry {
 	String discussion;
 	
 	
+	public TheWork() {};
 	
 	public TheWork(int id, String description) {
 		this.id = id;

@@ -51,7 +51,7 @@ public class DisciplineController implements ApplicationContextAware {
 		
 		model.addAttribute("entries", ds.getDisciplineList());
 		
-		return "gtd/listDisciplines";
+		return "regularthings/listDisciplines";
 	}
 
 	@RequestMapping(value="/editDiscipline/{id}")
@@ -63,7 +63,7 @@ public class DisciplineController implements ApplicationContextAware {
 		model.addAttribute("discipline", discipline);
 	
 		
-		return "/gtd/editDiscipline";
+		return "/regularthings/editDiscipline";
 	}
 
 	@RequestMapping(value="/updisciplineDiscipline", method = RequestMethod.POST)

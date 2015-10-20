@@ -9,7 +9,8 @@ public class Gratitude implements JournalEntry {
 	String grateful;
 	String proud;
 	String laughed;
-	
+
+	public Gratitude() {};
 	
 	public Gratitude(int id, String description) {
 		this.id = id;

@@ -3,15 +3,15 @@ package de.mysystem.controller.journal;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import de.mysystem.controller.gtd.GtdService;
-import de.mysystem.controller.gtd.GtdStatusFactory;
 
+@Controller
 public class JournalController implements ApplicationContextAware {
 
     private static ApplicationContext context;
@@ -28,9 +28,18 @@ public class JournalController implements ApplicationContextAware {
     }
 
 
+	@RequestMapping(value="/listJournal")
+	public String listTasks(Model model) {
+		JournalService js = context.getBean("journalService", JournalService.class);
+		model.addAttribute("entries", js.getJournalEntryList());
+		
+		return "journal/listJournal";
+	}
+
+    
 	@RequestMapping(value="/addLesson")
 	public String addLesson(Model model) {
-		
+		System.out.println("lesson added");
 		JournalService js = context.getBean("journalService", JournalService.class);
 
 		Lesson lesson= js.addLesson();
@@ -44,12 +53,13 @@ public class JournalController implements ApplicationContextAware {
 		
 		model.addAttribute("entries", js.getJournalEntryList());
 		
-		return "gtd/listTasks";
+		return "journal/listTasks";
 	}
 
 	@RequestMapping(value="/editLesson/{id}")
 	public String editLesson(@PathVariable(value="id") int id, Model model) {
-		
+		System.out.println("lesson edit called");
+
 		JournalService js = context.getBean("journalService", JournalService.class);
 		Lesson lesson = (Lesson)js.getLesson(id);
 		

@@ -11,6 +11,8 @@ public class Task implements ToDo {
 	Boolean doTomorrow;
 	ToDo parent;
 
+	public Task() {};
+	
 	public Task(int id, String descrption) {
 		this.id = id;
 		this.description = descrption;

@@ -6,11 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import de.mysystem.helpers.Idgenerator;
+
+
+@Service
+@Scope("session")
 public class DateService {
 	Map<Integer, Date> dates = new HashMap<Integer, Date>();
-	Map<Integer, Habit> habits = new HashMap<Integer, Habit>();
-	Map<Integer, Discipline> disciplines = new HashMap<Integer, Discipline>();
-	
 
 	
 	public List<Date> getDateList() {
@@ -35,14 +40,9 @@ public class DateService {
 	public void updateDate(Date date) {
 		dates.put(date.getId(), date);
 	}
-
-
-	
 	
 	private int getNextId() {
-		int id = Collections.max(dates.keySet());
-		
-		return id + 1;
+		return Idgenerator.getNextId(dates.keySet());
 	}
 
 

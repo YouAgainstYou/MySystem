@@ -6,6 +6,8 @@ public class Discipline {
 	String description;
 	
 	
+	public Discipline() {};
+	
 	public Discipline(int id, String description) {
 		this.id = id;
 		this.description = description;

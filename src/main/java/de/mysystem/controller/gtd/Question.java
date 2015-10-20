@@ -7,8 +7,9 @@ public class Question implements ToDo {
 	GtdStatus status;
 	ToDo parent;
 
+	public Question() {};
+	
 	public Question(int id, String question, String answer) {
-		super();
 		this.id = id;
 		this.question = question;
 		this.answer = answer;

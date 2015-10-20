@@ -1,23 +1,16 @@
 package de.mysystem.controller.regularthings;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import de.mysystem.controller.journal.JournalEntry;
-import de.mysystem.controller.journal.JournalService;
-import de.mysystem.controller.journal.Lesson;
-
+@Controller
 public class DateController implements ApplicationContextAware {
 
     private static ApplicationContext context;
@@ -51,7 +44,7 @@ public class DateController implements ApplicationContextAware {
 		
 		model.addAttribute("entries", ds.getDateList());
 		
-		return "gtd/listDates";
+		return "regularthings/listDates";
 	}
 	@RequestMapping(value="/editDate/{id}")
 	public String editDate(@PathVariable(value="id") int id, Model model) {
@@ -62,7 +55,7 @@ public class DateController implements ApplicationContextAware {
 		model.addAttribute("date", date);
 	
 		
-		return "/gtd/editDate";
+		return "/regularthings/editDate";
 	}
 	@RequestMapping(value="/updateDate", method = RequestMethod.POST)
 	public String updateDate(@ModelAttribute Date date) {

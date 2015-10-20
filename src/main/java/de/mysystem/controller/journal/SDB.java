@@ -8,6 +8,8 @@ public class SDB implements JournalEntry {
 	String description;
 	Date inserted;
 	
+	public SDB() {};
+	
 	public SDB(int id, String description) {
 		this.id = id;
 		this.description = description;

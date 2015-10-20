@@ -18,7 +18,7 @@ Habit<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 </head>
 
 <body>
-	<form:form commandName="lesson" action="../updateGratitude" method="POST">  
+	<form:form commandName="lesson" action="../updateLesson" method="POST" modelAttribute="lesson">  
 		<form:input path="id"/>
 		
 		description<br>

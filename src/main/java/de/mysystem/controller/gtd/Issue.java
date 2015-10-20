@@ -6,6 +6,8 @@ public class Issue implements ToDo {
 	GtdStatus status;
 	ToDo parent;
 
+	public Issue() {};
+	
 	public Issue(int id, String descrption) {
 		super();
 		this.id = id;

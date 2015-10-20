@@ -4,16 +4,15 @@ import java.util.Date;
 
 public class Lesson implements JournalEntry {
 	int id;
-	String description;
 	String whatHappened;
 	String lesson;
 	Date inserted;
 	
-	
 
+	public Lesson() {};
+	
 	public Lesson(int id, String description) {
 		this.id = id;
-		this.description = description;
 		this.inserted = new Date();
 	}
 
@@ -26,12 +25,9 @@ public class Lesson implements JournalEntry {
 	}
 
 	public String getDescription() {
-		return description;
+		return lesson;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public String getWhatHappened() {
 		return whatHappened;

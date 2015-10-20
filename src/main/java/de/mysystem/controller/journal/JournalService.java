@@ -6,7 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
+import de.mysystem.helpers.Idgenerator;
+
+@Service
+@Scope("session")
 public class JournalService {
 	Map<Integer, JournalEntry> entries = new HashMap<Integer, JournalEntry>();
 
@@ -20,7 +26,7 @@ public class JournalService {
 
 	
 	public Lesson addLesson() {
-		Lesson entry= new Lesson(getNextId(), "new Task");
+		Lesson entry= new Lesson(getNextId(), "new Lesson");
 		
 		entries.put(entry.getId(), entry);
 		
@@ -95,9 +101,6 @@ public class JournalService {
 	
 	
 	private int getNextId() {
-		int id = Collections.max(entries.keySet());
-		
-		return id + 1;
-	}
+		return Idgenerator.getNextId(entries.keySet());	}
 
 }

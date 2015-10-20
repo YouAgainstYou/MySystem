@@ -11,6 +11,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import de.mysystem.helpers.Idgenerator;
+
 @Service
 @Scope("session")
 public class GtdService  {
@@ -126,8 +128,6 @@ public class GtdService  {
 	
 	
 	private int getNextId() {
-		int id = Collections.max(todos.keySet());
-		
-		return id + 1;
+		return Idgenerator.getNextId(todos.keySet());
 	}
 }

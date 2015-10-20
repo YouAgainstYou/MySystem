@@ -39,20 +39,22 @@ $(document).ready("filterText").keyup(function(){
 	<input type=text id="filterText" />
 
 	<table>
-		<c:forEach var="entry" items="${journalEntries}">
+		<c:forEach var="entry" items="${entries}">
 			<tr>
 				<td><c:out value="${entry.id}" /></td>
 				<td><c:out value="${entry.description}" /></td>
 				
-				<td><c:out value="${date.description}" /></td>
-
-				<td><a href="<c:url value='/'/>edit<c:out value="${entry.type}" />.type}" />">/${entry.id}" class="button">edit</a></td>
-				<td><a href="<c:url value='/'/>delete<c:out value="${entry.type}" />.type}" />">/${entry.id}" class="button">delete</a></td>
+				<td><a href="<c:url value='/'/>edit<c:out value="${entry.type}" />/${entry.id}" class="button">edit</a></td>
+				<td><a href="<c:url value='/'/>delete<c:out value="${entry.type}" />/${entry.id}" class="button">delete</a></td>
 
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="<c:url value='/'/>addDate" class="button">new</a>
+	<a href="<c:url value='/'/>addLesson" class="button">new lesson</a>
+	<a href="<c:url value='/'/>addTheWork" class="button">new work</a>
+	<a href="<c:url value='/'/>addGratitude" class="button">new gratitude</a>
+	<a href="<c:url value='/'/>addSdb" class="button">new SDB</a>
+	
 
 </body>
 </html>

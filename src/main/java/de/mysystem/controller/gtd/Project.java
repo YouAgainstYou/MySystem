@@ -5,6 +5,7 @@ public class Project implements ToDo {
 	String description;
 	ToDo parent;
 	
+	public Project() {};
 	
 	public Project (int id, String description) {
 		this.id = id;

@@ -13,7 +13,7 @@ public class Habit {
 	java.util.Date inserted;
 	
 	
-	
+	public Habit() {};
 	
 	public Habit(int id, String description) {
 		this.id = id;
