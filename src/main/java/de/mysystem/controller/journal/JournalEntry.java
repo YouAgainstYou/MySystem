@@ -1,28 +1,17 @@
 package de.mysystem.controller.journal;
 
-import java.util.List;
+import java.util.Date;
 
-import de.mysystem.controller.gtd.ToDo;
 
-public class JournalEntry {
-	int id;
-	String description;
+public interface JournalEntry {
+
+	public int getId();
+
+	public String getDescription();
 	
+	public Date getInserted();
+	
+	public String getType();
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 }
