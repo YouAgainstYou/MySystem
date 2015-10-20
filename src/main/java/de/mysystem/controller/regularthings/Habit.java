@@ -4,13 +4,28 @@ public class Habit {
 
 	int id;
 	String cue;
+	String description;
 	String badRoutine;
 	String productiveRoutine;
 	String badReward;
 	String sideEffects;
 	String productiveReward;
+	java.util.Date inserted;
 	
 	
+	
+	
+	public Habit(int id, String description) {
+		this.id = id;
+		this.description = description;
+		this.inserted = new java.util.Date();
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public int getId() {
 		return id;
 	}

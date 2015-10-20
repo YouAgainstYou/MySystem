@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,14 +74,9 @@ public class GtdController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/updateTask", method = RequestMethod.POST)
-	public String updateTask(@RequestParam(value="id") String id,
-			@RequestParam(value="description") String description,
-			@RequestParam(value="status") GtdStatus status) {
+	public String updateTask(@ModelAttribute("task") Task task) {
 
 		GtdService gs = context.getBean("gtdService", GtdService.class);
-		Task task = (Task)gs.getTask(Integer.valueOf(id));
-		task.setDescription(description);
-		task.setStatus(status);
 		
 		gs.updateTask(task);
 		
@@ -97,7 +93,7 @@ public class GtdController implements ApplicationContextAware {
 
 		Issue issue = gs.addIssue();
 		
-		return "redirect:/editTask/" + issue.getId();
+		return "redirect:/editIssue/" + issue.getId();
 	}
 	@RequestMapping(value="/deleteIssue/{id}")
 	public String deleteIssue(@PathVariable(value="id") String id, Model model) {
@@ -110,10 +106,10 @@ public class GtdController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/editIssue/{id}")
-	public String editIssue(@PathVariable(value="id") String id, Model model) {
+	public String editIssue(@PathVariable(value="id") int id, Model model) {
 		
 		GtdService gs = context.getBean("gtdService", GtdService.class);
-		Issue issueToEdit = (Issue)gs.getIssue(Integer.valueOf(id));
+		Issue issueToEdit = (Issue)gs.getIssue(id);
 		
 		model.addAttribute("issue", issueToEdit);
 	
@@ -124,13 +120,9 @@ public class GtdController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/updateIssue", method = RequestMethod.POST)
-	public String updateIssue(@RequestParam(value="id") String id,
-			@RequestParam(value="description") String description) {
+	public String updateIssue(@ModelAttribute Issue issue) {
 
 		GtdService gs = context.getBean("gtdService", GtdService.class);
-
-		Issue issue = (Issue)gs.getIssue(Integer.valueOf(id));
-		issue.setDescription(description);
 		
 		gs.updateIssue(issue);
 		
@@ -171,17 +163,12 @@ public class GtdController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/updateQuestion", method = RequestMethod.POST)
-	public String updateQuestion(@RequestParam(value="id") String id,
-			@RequestParam(value="question") String question,
-			@RequestParam(value="answer") String answer) {
+	public String updateQuestion(@ModelAttribute Question question) {
 
 		GtdService gs = context.getBean("gtdService", GtdService.class);
 
-		Question q = (Question)gs.getQuestion(Integer.valueOf(id));
-		q.setQuestion(question);
-		q.setAnswer(answer);
 		
-		gs.updateQuestion(q);
+		gs.updateQuestion(question);
 		
 		
 		return "redirect:/listTasks";

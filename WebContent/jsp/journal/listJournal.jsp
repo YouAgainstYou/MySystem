@@ -39,16 +39,15 @@ $(document).ready("filterText").keyup(function(){
 	<input type=text id="filterText" />
 
 	<table>
-		<c:forEach var="date" items="${dates}">
+		<c:forEach var="entry" items="${journalEntries}">
 			<tr>
-				<td><c:out value="${date.id}" /></td>
-				<td><c:out value="${date.date}" /></td>
-				<td><c:out value="${date.time}" /></td>
+				<td><c:out value="${entry.id}" /></td>
+				<td><c:out value="${entry.description}" /></td>
 				
 				<td><c:out value="${date.description}" /></td>
 
-				<td><a href="<c:url value='/'/>editDate">/${date.id}" class="button">edit</a></td>
-				<td><a href="<c:url value='/'/>deleteDate">/${date.id}" class="button">delete</a></td>
+				<td><a href="<c:url value='/'/>edit<c:out value="${entry.type}" />.type}" />">/${entry.id}" class="button">edit</a></td>
+				<td><a href="<c:url value='/'/>delete<c:out value="${entry.type}" />.type}" />">/${entry.id}" class="button">delete</a></td>
 
 			</tr>
 		</c:forEach>

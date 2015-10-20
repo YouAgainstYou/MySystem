@@ -6,11 +6,22 @@ import de.mysystem.controller.gtd.ToDo;
 
 public class Date {
 	int id;
-	Date date;
+	java.util.Date date;
 	String time;
 	String description;
+	java.util.Date inserted;
 	
 	List<ToDo> todos;
+
+	
+	
+	
+	public Date(int id, java.util.Date date, String time, String description) {
+		this.id = id;
+		this.date = date;
+		this.time = time;
+		this.description = description;
+	}
 
 	public int getId() {
 		return id;
@@ -20,11 +31,11 @@ public class Date {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public java.util.Date getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(java.util.Date date) {
 		this.date = date;
 	}
 

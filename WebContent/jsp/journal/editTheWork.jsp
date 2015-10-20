@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+Habit<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -18,13 +18,18 @@
 </head>
 
 <body>
-	<form:form commandName="issue" action="../updateIssue" method="POST">  
+	<form:form commandName="theWork" action="../updateTheWork" method="POST">  
 		<form:input path="id"/>
 		
-		description:<br>
-		<form:input path="date" type="date" />
-		<form:input path="time"/>
-		<form:input path="description"/>
+		description<br>
+		<form:textarea path="statement"/>
+
+		turn it around<br>
+		<form:textarea path="turnedAround"/>
+
+		discussion<br>
+		<form:textarea path="discussion"/>
+
 		
 		<input type="submit" class="button" />
 	</form:form>	
