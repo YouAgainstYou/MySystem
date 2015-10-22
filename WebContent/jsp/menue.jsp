@@ -7,16 +7,12 @@
   </ul>
 
   <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="active"><a href="#">Right Button Active</a></li>
-      <li class="has-dropdown">
-        <a href="#">Right Button Dropdown</a>
-        <ul class="dropdown">
-          <li><a href="#">First link in dropdown</a></li>
-          <li class="active"><a href="#">Active link in dropdown</a></li>
-        </ul>
-      </li>
+    <ul class="left">
+      <li class="active"><a href="/dashboard">dashboard</a></li>
+      <li class="active"><a href="/listDates">dates</a></li>
+      <li class="active"><a href="/listTasks">to dos</a></li>
+      <li class="active"><a href="/listDisciplines">disciplines</a></li>
+      <li class="active"><a href="/listHabits">habits</a></li>
     </ul>
 
   </section>

@@ -7,5 +7,6 @@ public enum GtdStatus {
 	DONE,
 	RESOLVED,
 	UNANSWERED,
-	ANSWERED
+	ANSWERED,
+	ACTIVE
 }

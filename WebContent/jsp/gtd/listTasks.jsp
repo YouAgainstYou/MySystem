@@ -53,6 +53,9 @@ $(document).ready("filterText").keyup(function(){
 		</c:forEach>
 	</table>
 	<a href="<c:url value='/'/>addTask" class="button">new</a>
+	<a href="<c:url value='/'/>addQuestion" class="button">new</a>
+	<a href="<c:url value='/'/>addIssue" class="button">new</a>
+	<a href="<c:url value='/'/>addProject" class="button">new</a>
 
 </body>
 </html>

@@ -176,4 +176,49 @@ public class GtdController implements ApplicationContextAware {
 	
 	
 	
+	@RequestMapping(value="/addProject")
+	public String addProject(Model model) {
+
+		GtdService gs = context.getBean("gtdService", GtdService.class);
+		Project Project = gs.addProject();
+		
+		HistoryService hs = context.getBean("historyService", HistoryService.class);
+		hs.addEntry("Project added");
+		
+		return "redirect:/editProject/" + Project.getId();
+	}
+
+	@RequestMapping(value="/deleteProject/{id}")
+	public String deleteProject(@PathVariable(value="id") String id, Model model) {
+		GtdService gs = context.getBean("gtdService", GtdService.class);
+		gs.deleteProject(Integer.valueOf(id));
+		
+		model.addAttribute("Projects", gs.getTaskList());
+		
+		return "gtd/listProjects";
+	}
+	
+	@RequestMapping(value="/editProject/{id}")
+	public String editProject(@PathVariable(value="id") String id, Model model) {
+		GtdService gs = context.getBean("gtdService", GtdService.class);
+		Project projectToEdit = (Project)gs.getProject(Integer.valueOf(id));
+		
+		model.addAttribute("Project", projectToEdit);
+		
+		model.addAttribute("ProjectStati", GtdStatusFactory.getTaskStati());
+	
+		return "/gtd/editProject";
+	}
+
+	@RequestMapping(value="/updateProject", method = RequestMethod.POST)
+	public String updateProject(@ModelAttribute("project") Project project) {
+
+		GtdService gs = context.getBean("gtdService", GtdService.class);
+		
+		gs.updateProject(project);
+		
+		
+		return "redirect:/listProjects";
+	}
+	
 }

@@ -3,7 +3,7 @@ package de.mysystem.controller.gtd;
 public class Project implements ToDo {
 	int id;
 	String description;
-	ToDo parent;
+	Project parent;
 	
 	public Project() {};
 	
@@ -11,7 +11,6 @@ public class Project implements ToDo {
 		this.id = id;
 		this.description = description;
 	}
-	
 	
 	
 	public int getId() {
@@ -26,15 +25,14 @@ public class Project implements ToDo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public ToDo getParent() {
+	public Project getParent() {
 		return parent;
 	}
-	public void setParent(ToDo parent) {
+	public void setParent(Project parent) {
 		this.parent = parent;
 	}
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Project";
 	}
 	

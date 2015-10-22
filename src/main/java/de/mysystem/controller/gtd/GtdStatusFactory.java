@@ -30,5 +30,13 @@ public class GtdStatusFactory {
 
 	}
 
-	
+	public static final List<GtdStatus> getProjectStati() {
+		List<GtdStatus> result = new ArrayList<>();
+		result.add(GtdStatus.OPEN);
+		result.add(GtdStatus.ACTIVE);
+		result.add(GtdStatus.DONE);
+		
+		return result;
+	}
+
 }
