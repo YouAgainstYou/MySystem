@@ -5,8 +5,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-
 	<bean id="gtdService" class="de.mysystem.controller.gtd.GtdService" scope="global-session"></bean>
+	<bean id="projectService" class="de.mysystem.controller.gtd.ProjectService" scope="global-session"></bean>
 
 	<bean id="dateService" class="de.mysystem.controller.regularthings.DateService" scope="global-session"></bean>
 	<bean id="disciplineService" class="de.mysystem.controller.regularthings.DisciplineService" scope="global-session"></bean>
@@ -16,8 +16,5 @@
 	<bean id="journalService" class="de.mysystem.controller.journal.JournalService" scope="global-session"></bean>
 	
 	<bean id="historyService" class="de.mysystem.controller.history.HistoryService" scope="global-session"></bean>
-	
-	
-
 	
 </beans>

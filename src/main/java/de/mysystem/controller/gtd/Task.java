@@ -10,6 +10,9 @@ public class Task implements ToDo {
 	Date inserted;
 	Boolean doTomorrow;
 	ToDo parent;
+	boolean doToday;
+
+	
 
 	public Task() {};
 	
@@ -47,6 +50,22 @@ public class Task implements ToDo {
 	public void setDoTomorrow(Boolean doTomorrow) {
 		this.doTomorrow = doTomorrow;
 	}
+	public ToDo getParent() {
+		return parent;
+	}
+
+	public void setParent(ToDo parent) {
+		this.parent = parent;
+	}
+
+	public boolean isDoToday() {
+		return doToday;
+	}
+
+	public void setDoToday(boolean doToday) {
+		this.doToday = doToday;
+	}
+
 	
 	public String getType() {
 		return "Task";

@@ -24,6 +24,9 @@
 		description:<br>
 		<form:input path="description"/>
 		
+		description:<br>
+		<form:select path="areaOfLife" items="areasOfLife"/>
+
 		<input type="submit" class="button" />
 	</form:form>	
 </body>
