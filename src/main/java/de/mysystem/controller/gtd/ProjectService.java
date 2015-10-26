@@ -17,18 +17,15 @@ public class ProjectService  {
 	Map<Integer, Project> projects = new HashMap<Integer, Project>();
 	
 	
-	
 	@PostConstruct
 	public void init() {
 		projects.put(0, new Project(0, "10000"));
 		projects.put(1, new Project(1, "118"));
 		projects.put(2, new Project(2, "PMP"));
 		projects.put(3, new Project(3, "MY SYSTEM 1.0"));
-		projects.put(4, new Project(4, "100"));
+		projects.put(4, new Project(4, "ZEN PM"));
 	}
 
-	
-	
 	
 	public Project addProject() {
 		Project issue = new Project(getNextId(), "new Project");

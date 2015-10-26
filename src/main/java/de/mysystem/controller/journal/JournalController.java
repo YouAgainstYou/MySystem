@@ -1,6 +1,7 @@
 package de.mysystem.controller.journal;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
@@ -12,25 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-public class JournalController implements ApplicationContextAware {
+public class JournalController  {
 
-    private static ApplicationContext context;
-    
-    
-    public static ApplicationContext getApplicationContext() {
-        return context;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ac)
-            throws BeansException {
-        context = ac;
-    }
-
+	@Autowired
+	JournalService js;
+	
 
 	@RequestMapping(value="/listJournal")
 	public String listTasks(Model model) {
-		JournalService js = context.getBean("journalService", JournalService.class);
 		model.addAttribute("entries", js.getJournalEntryList());
 		
 		return "journal/listJournal";
@@ -40,15 +30,13 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/addLesson")
 	public String addLesson(Model model) {
 		System.out.println("lesson added");
-		JournalService js = context.getBean("journalService", JournalService.class);
 
 		Lesson lesson= js.addLesson();
 		
 		return "redirect:/editLesson/" + lesson.getId();
 	}
 	@RequestMapping(value="/deleteLesson/{id}")
-	public String deleteLesson(@PathVariable(value="id") int id, Model model) {
-		JournalService js = context.getBean("journalService", JournalService.class);
+	public String deleteLesson(@PathVariable int id, Model model) {
 		js.deleteLesson(id);
 		
 		model.addAttribute("entries", js.getJournalEntryList());
@@ -57,10 +45,9 @@ public class JournalController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/editLesson/{id}")
-	public String editLesson(@PathVariable(value="id") int id, Model model) {
+	public String editLesson(@PathVariable int id, Model model) {
 		System.out.println("lesson edit called");
 
-		JournalService js = context.getBean("journalService", JournalService.class);
 		Lesson lesson = (Lesson)js.getLesson(id);
 		
 		model.addAttribute("lesson", lesson);
@@ -72,10 +59,7 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/updateLesson", method = RequestMethod.POST)
 	public String updateLesson(@ModelAttribute Lesson lesson) {
 
-		JournalService js = context.getBean("journalService", JournalService.class);
-		
 		js.updateLesson(lesson);
-		
 		
 		return "redirect:/listJournal";
 	}
@@ -86,15 +70,13 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/addTheWork")
 	public String addTheWork(Model model) {
 		
-		JournalService js = context.getBean("journalService", JournalService.class);
-
 		TheWork theWork= js.addTheWork();
 		
 		return "redirect:/editTheWork/" + theWork.getId();
 	}
 	@RequestMapping(value="/deleteTheWork/{id}")
-	public String deleteTheWork(@PathVariable(value="id") int id, Model model) {
-		JournalService js = context.getBean("journalService", JournalService.class);
+	public String deleteTheWork(@PathVariable int id, Model model) {
+
 		js.deleteTheWork(id);
 		
 		model.addAttribute("entries", js.getJournalEntryList());
@@ -103,9 +85,8 @@ public class JournalController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/editTheWork/{id}")
-	public String editTheWork(@PathVariable(value="id") int id, Model model) {
+	public String editTheWork(@PathVariable int id, Model model) {
 		
-		JournalService js = context.getBean("journalService", JournalService.class);
 		TheWork theWork = (TheWork)js.getTheWork(id);
 		
 		model.addAttribute("theWork", theWork);
@@ -117,10 +98,7 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/updateTheWork", method = RequestMethod.POST)
 	public String updateTheWork(@ModelAttribute TheWork theWork) {
 
-		JournalService js = context.getBean("journalService", JournalService.class);
-		
 		js.updateTheWork(theWork);
-		
 		
 		return "redirect:/listJournal";
 	}
@@ -131,15 +109,13 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/addSdb")
 	public String addSdb(Model model) {
 		
-		JournalService js = context.getBean("journalService", JournalService.class);
-
 		SDB sdb= js.addSdb();
 		
 		return "redirect:/sdbTask/" + sdb.getId();
 	}
 	@RequestMapping(value="/deleteSdb/{id}")
-	public String deleteSdb(@PathVariable(value="id") int id, Model model) {
-		JournalService js = context.getBean("journalService", JournalService.class);
+	public String deleteSdb(@PathVariable int id, Model model) {
+
 		js.deleteSdb(id);
 		
 		model.addAttribute("entries", js.getJournalEntryList());
@@ -148,9 +124,8 @@ public class JournalController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/editSdb/{id}")
-	public String editSdb(@PathVariable(value="id") int id, Model model) {
+	public String editSdb(@PathVariable int id, Model model) {
 		
-		JournalService js = context.getBean("journalService", JournalService.class);
 		SDB sdb = (SDB)js.getSdb(id);
 		
 		model.addAttribute("sdb", sdb);
@@ -162,10 +137,7 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/updateSdb", method = RequestMethod.POST)
 	public String updateSDB(@ModelAttribute SDB sdb) {
 
-		JournalService js = context.getBean("journalService", JournalService.class);
-		
 		js.updateSdb(sdb);
-		
 		
 		return "redirect:/listJournal";
 	}
@@ -175,15 +147,12 @@ public class JournalController implements ApplicationContextAware {
 	@RequestMapping(value="/addGratitude")
 	public String addGratitude(Model model) {
 		
-		JournalService js = context.getBean("journalService", JournalService.class);
-
 		Gratitude gratitude = js.addGratitude();
 		
 		return "redirect:/editGratitude/" + gratitude.getId();
 	}
 	@RequestMapping(value="/deleteGratitude/{id}")
-	public String deleteGratitude(@PathVariable(value="id") int id, Model model) {
-		JournalService js = context.getBean("journalService", JournalService.class);
+	public String deleteGratitude(@PathVariable int id, Model model) {
 		js.deleteGratitude(id);
 		
 		model.addAttribute("entries", js.getJournalEntryList());
@@ -192,9 +161,8 @@ public class JournalController implements ApplicationContextAware {
 	}
 
 	@RequestMapping(value="/editGratitude/{id}")
-	public String editGratitude(@PathVariable(value="id") int id, Model model) {
+	public String editGratitude(@PathVariable int id, Model model) {
 		
-		JournalService js = context.getBean("journalService", JournalService.class);
 		Gratitude gratitude = (Gratitude)js.getGratitude(id);
 		
 		model.addAttribute("gratitude", gratitude);
@@ -205,8 +173,6 @@ public class JournalController implements ApplicationContextAware {
 
 	@RequestMapping(value="/updateGratitude", method = RequestMethod.POST)
 	public String updateGratitude(@ModelAttribute Gratitude gratitude) {
-
-		JournalService js = context.getBean("journalService", JournalService.class);
 		
 		js.updateGratitude(gratitude);
 		

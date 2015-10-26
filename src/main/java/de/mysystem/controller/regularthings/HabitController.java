@@ -18,47 +18,31 @@ import de.mysystem.controller.journal.JournalEntry;
 import de.mysystem.controller.journal.JournalService;
 import de.mysystem.controller.journal.Lesson;
 
-public class HabitController implements ApplicationContextAware {
+public class HabitController  {
 
-    private static ApplicationContext context;
-    
-    
-    public static ApplicationContext getApplicationContext() {
-        return context;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ac)
-            throws BeansException {
-        context = ac;
-    }
-
-
+	HabitService hs;
     
 	@RequestMapping(value="/addHabit")
 	public String addHabit(Model model) {
-		
-		HabitService ds = context.getBean("habitService", HabitService.class);
 
-		Habit habit= ds.addHabit();
+		Habit habit= hs.addHabit();
 		
 		return "redirect:/editDiscipline/" + habit.getId();
 	}
 	@RequestMapping(value="/deleteHabit/{id}")
-	public String deleteHabit(@PathVariable(value="id") int id, Model model) {
-		HabitService ds = context.getBean("habitService", HabitService.class);
-		ds.deleteHabit(id);
+	public String deleteHabit(@PathVariable int id, Model model) {
+
+		hs.deleteHabit(id);
 		
-		model.addAttribute("entries", ds.getHabitList());
+		model.addAttribute("entries", hs.getHabitList());
 		
 		return "regularthings/listHabits";
 	}
 
 	@RequestMapping(value="/editHabit/{id}")
-	public String editHabit(@PathVariable(value="id") int id, Model model) {
-		
-		HabitService ds = context.getBean("habitService", HabitService.class);
-		Habit habit = (Habit)ds.getHabit(id);
+	public String editHabit(@PathVariable int id, Model model) {
+
+		Habit habit = (Habit)hs.getHabit(id);
 		
 		model.addAttribute("habit", habit);
 	
@@ -68,11 +52,8 @@ public class HabitController implements ApplicationContextAware {
 
 	@RequestMapping(value="/updateHabit", method = RequestMethod.POST)
 	public String updateHabit(@ModelAttribute Habit habit) {
-
-		HabitService ds = context.getBean("habitService", HabitService.class);
 		
-		ds.updateHabit(habit);
-		
+		hs.updateHabit(habit);
 		
 		return "redirect:/listHabits";
 	}
