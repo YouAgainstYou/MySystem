@@ -1,64 +1,51 @@
 package de.mysystem.controller.regularthings;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import de.mysystem.controller.journal.JournalEntry;
-import de.mysystem.controller.journal.JournalService;
-import de.mysystem.controller.journal.Lesson;
 
-public class HabitController implements ApplicationContextAware {
+@Controller
+public class HabitController  {
 
-    private static ApplicationContext context;
-    
-    
-    public static ApplicationContext getApplicationContext() {
-        return context;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ac)
-            throws BeansException {
-        context = ac;
-    }
-
+	@Autowired
+	HabitService hs;
+	
+	
+	@RequestMapping(value="/listHabits")
+	public String listHabits(Model model) {
+		System.out.println("listHabits called.");
+		model.addAttribute("habits", hs.getHabitList());
+		
+		return "/regularthings/listHabits";
+	}
 
     
 	@RequestMapping(value="/addHabit")
 	public String addHabit(Model model) {
-		
-		HabitService ds = context.getBean("habitService", HabitService.class);
 
-		Habit habit= ds.addHabit();
+		Habit habit= hs.addHabit();
 		
-		return "redirect:/editDiscipline/" + habit.getId();
+		return "redirect:/editHabit/" + habit.getId();
 	}
 	@RequestMapping(value="/deleteHabit/{id}")
-	public String deleteHabit(@PathVariable(value="id") int id, Model model) {
-		HabitService ds = context.getBean("habitService", HabitService.class);
-		ds.deleteHabit(id);
+	public String deleteHabit(@PathVariable int id, Model model) {
+
+		hs.deleteHabit(id);
 		
-		model.addAttribute("entries", ds.getHabitList());
+		model.addAttribute("entries", hs.getHabitList());
 		
 		return "regularthings/listHabits";
 	}
 
 	@RequestMapping(value="/editHabit/{id}")
-	public String editHabit(@PathVariable(value="id") int id, Model model) {
-		
-		HabitService ds = context.getBean("habitService", HabitService.class);
-		Habit habit = (Habit)ds.getHabit(id);
+	public String editHabit(@PathVariable int id, Model model) {
+
+		Habit habit = (Habit)hs.getHabit(id);
 		
 		model.addAttribute("habit", habit);
 	
@@ -69,11 +56,8 @@ public class HabitController implements ApplicationContextAware {
 	@RequestMapping(value="/updateHabit", method = RequestMethod.POST)
 	public String updateHabit(@ModelAttribute Habit habit) {
 
-		HabitService ds = context.getBean("habitService", HabitService.class);
-		
-		ds.updateHabit(habit);
-		
-		
+		hs.updateHabit(habit);
+				
 		return "redirect:/listHabits";
 	}
 

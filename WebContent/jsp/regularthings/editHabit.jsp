@@ -18,13 +18,13 @@
 </head>
 
 <body>
-	<form:form commandName="issue" action="../updateIssue" method="POST">  
+	<form:form commandName="habit" action="../updateHabit" method="POST">  
 		<form:input path="id"/>
 		
-		description:<br>
-		<form:input path="date" type="date" />
-		<form:input path="time"/>
-		<form:input path="description"/>
+		cue:<br>
+		<form:input path="cue"/>
+		
+		
 		
 		<input type="submit" class="button" />
 	</form:form>	

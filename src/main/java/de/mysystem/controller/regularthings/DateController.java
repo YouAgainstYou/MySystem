@@ -1,67 +1,64 @@
 package de.mysystem.controller.regularthings;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.
 
 @Controller
-public class DateController implements ApplicationContextAware {
+public class DateController {
 
-    private static ApplicationContext context;
-    
-    
-    public static ApplicationContext getApplicationContext() {
-        return context;
-    }
+	@Autowired
+	DateService ds;
 
-    @Override
-    public void setApplicationContext(ApplicationContext ac)
-            throws BeansException {
-        context = ac;
-    }
+	@Autowired
+	LocalSessionFactoryBean sf;
+	
+	
+	@RequestMapping(value="/listDates")
+	public String listDisciplines(Model model) {
+		System.out.println("listDates called.");
+		model.addAttribute("dates", ds.getDateList());
+		
+		return "/regularthings/listDates";
+	}
 
-
-    
 	@RequestMapping(value="/addDate")
 	public String addDate(Model model) {
-		
-		DateService ds = context.getBean("dateService", DateService.class);
 
-		Date date= ds.addDate();
+		FixedDate date= ds.addDate();
 		
 		return "redirect:/editDate/" + date.getId();
 	}
+	
 	@RequestMapping(value="/deleteDate/{id}")
-	public String deleteDate(@PathVariable(value="id") int id, Model model) {
-		DateService ds = context.getBean("dateService", DateService.class);
+	public String deleteDate(@PathVariable int id, Model model) {
+
 		ds.deleteDate(id);
 		
-		model.addAttribute("entries", ds.getDateList());
+		model.addAttribute("dates", ds.getDateList());
 		
 		return "regularthings/listDates";
 	}
+	
 	@RequestMapping(value="/editDate/{id}")
-	public String editDate(@PathVariable(value="id") int id, Model model) {
+	public String editDate(@PathVariable int id, Model model) {
 		
-		DateService ds = context.getBean("dateService", DateService.class);
-		Date date = (Date)ds.getDate(id);
+		FixedDate date = (FixedDate)ds.getDate(id);
 		
-		model.addAttribute("date", date);
+		model.addAttribute("fixedDate", date);
 	
 		
 		return "/regularthings/editDate";
 	}
+	
 	@RequestMapping(value="/updateDate", method = RequestMethod.POST)
-	public String updateDate(@ModelAttribute Date date) {
-
-		DateService ds = context.getBean("dateService", DateService.class);
-		
+	public String updateDate(@ModelAttribute(value="date") FixedDate date) {
+		System.out.println("updateDate called");
 		ds.updateDate(date);
 		
 		return "redirect:/listDates";

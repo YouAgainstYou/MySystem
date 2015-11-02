@@ -5,6 +5,10 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>MySystem</display-name>
 
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/config/root-context.xml</param-value>

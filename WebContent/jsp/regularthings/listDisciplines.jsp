@@ -36,6 +36,8 @@ $(document).ready("filterText").keyup(function(){
 
 </head>
 <body>
+	<jsp:include page="../menue.jsp" />
+
 	<input type=text id="filterText" />
 
 	<table>
@@ -44,8 +46,8 @@ $(document).ready("filterText").keyup(function(){
 				<td><c:out value="${discipline.id}" /></td>
 				<td><c:out value="${discipline.description}" /></td>
 
-				<td><a href="<c:url value='/'/>editDiscipline">/${discipline.id}" class="button">edit</a></td>
-				<td><a href="<c:url value='/'/>deleteDiscipline">/${discipline.id}" class="button">delete</a></td>
+				<td><a href="<c:url value='/'/>editDiscipline/${discipline.id}" class="button">edit</a></td>
+				<td><a href="<c:url value='/'/>deleteDiscipline/${discipline.id}" class="button">delete</a></td>
 
 			</tr>
 		</c:forEach>

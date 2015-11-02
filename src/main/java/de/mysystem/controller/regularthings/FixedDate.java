@@ -2,11 +2,16 @@ package de.mysystem.controller.regularthings;
 
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import de.mysystem.controller.gtd.ToDo;
 
-public class Date {
+public class FixedDate {
 	int id;
+	
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
 	java.util.Date date;
+	
 	String time;
 	String description;
 	java.util.Date inserted;
@@ -14,9 +19,9 @@ public class Date {
 	List<ToDo> todos;
 
 	
-	public Date() {};
+	public FixedDate() {};
 	
-	public Date(int id, java.util.Date date, String time, String description) {
+	public FixedDate(int id, java.util.Date date, String time, String description) {
 		this.id = id;
 		this.date = date;
 		this.time = time;
