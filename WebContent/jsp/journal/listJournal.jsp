@@ -36,6 +36,8 @@ $(document).ready("filterText").keyup(function(){
 
 </head>
 <body>
+	<jsp:include page="../menue.jsp" />
+
 	<input type=text id="filterText" />
 
 	<table>

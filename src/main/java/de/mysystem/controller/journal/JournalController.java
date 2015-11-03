@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +24,7 @@ public class JournalController  {
 	public String listTasks(Model model) {
 		model.addAttribute("entries", js.getJournalEntryList());
 		
-		return "journal/listJournal";
+		return "/journal/listJournal";
 	}
 
     
@@ -41,7 +42,7 @@ public class JournalController  {
 		
 		model.addAttribute("entries", js.getJournalEntryList());
 		
-		return "journal/listTasks";
+		return "journal/listJournal";
 	}
 
 	@RequestMapping(value="/editLesson/{id}")
@@ -69,7 +70,7 @@ public class JournalController  {
 	
 	@RequestMapping(value="/addTheWork")
 	public String addTheWork(Model model) {
-		
+
 		TheWork theWork= js.addTheWork();
 		
 		return "redirect:/editTheWork/" + theWork.getId();
@@ -99,7 +100,7 @@ public class JournalController  {
 	public String updateTheWork(@ModelAttribute TheWork theWork) {
 
 		js.updateTheWork(theWork);
-		
+
 		return "redirect:/listJournal";
 	}
 
@@ -111,7 +112,7 @@ public class JournalController  {
 		
 		SDB sdb= js.addSdb();
 		
-		return "redirect:/sdbTask/" + sdb.getId();
+		return "redirect:/editSdb/" + sdb.getId();
 	}
 	@RequestMapping(value="/deleteSdb/{id}")
 	public String deleteSdb(@PathVariable int id, Model model) {
@@ -120,7 +121,7 @@ public class JournalController  {
 		
 		model.addAttribute("entries", js.getJournalEntryList());
 		
-		return "journal/listTasks";
+		return "journal/listJournal";
 	}
 
 	@RequestMapping(value="/editSdb/{id}")
@@ -131,7 +132,7 @@ public class JournalController  {
 		model.addAttribute("sdb", sdb);
 	
 		
-		return "/journal/editSDB";
+		return "/journal/editSdb";
 	}
 
 	@RequestMapping(value="/updateSdb", method = RequestMethod.POST)
@@ -146,13 +147,13 @@ public class JournalController  {
 	
 	@RequestMapping(value="/addGratitude")
 	public String addGratitude(Model model) {
-		
 		Gratitude gratitude = js.addGratitude();
 		
 		return "redirect:/editGratitude/" + gratitude.getId();
 	}
 	@RequestMapping(value="/deleteGratitude/{id}")
 	public String deleteGratitude(@PathVariable int id, Model model) {
+
 		js.deleteGratitude(id);
 		
 		model.addAttribute("entries", js.getJournalEntryList());

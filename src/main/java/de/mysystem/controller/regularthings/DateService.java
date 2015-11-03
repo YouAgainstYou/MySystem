@@ -1,7 +1,6 @@
 package de.mysystem.controller.regularthings;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,17 +14,17 @@ import de.mysystem.helpers.Idgenerator;
 @Service
 @Scope("session")
 public class DateService {
-	Map<Integer, Date> dates = new HashMap<Integer, Date>();
+	Map<Integer, FixedDate> dates = new HashMap<Integer, FixedDate>();
 
 	
-	public List<Date> getDateList() {
-		List<Date> dateList = new ArrayList<>();
+	public List<FixedDate> getDateList() {
+		List<FixedDate> dateList = new ArrayList<>();
 		dateList.addAll(dates.values());
 		
 		return dateList;
 	}
-	public Date addDate() {
-		Date entry= new Date(getNextId(), new java.util.Date(), "00:00", "new Date");
+	public FixedDate addDate() {
+		FixedDate entry= new FixedDate(getNextId(), new java.util.Date(), "00:00", "new Date");
 		
 		dates.put(entry.getId(), entry);
 		
@@ -34,10 +33,10 @@ public class DateService {
 	public void deleteDate(int id) {
 		dates.remove(id);
 	}
-	public Date getDate(int id) {
-		return (Date)dates.get(id);
+	public FixedDate getDate(int id) {
+		return (FixedDate)dates.get(id);
 	}
-	public void updateDate(Date date) {
+	public void updateDate(FixedDate date) {
 		dates.put(date.getId(), date);
 	}
 	

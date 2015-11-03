@@ -9,39 +9,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class DateController  {
+public class DateController {
 
 	@Autowired
 	DateService ds;
-    
+
+	
+	@RequestMapping(value="/listDates")
+	public String listDisciplines(Model model) {
+		System.out.println("listDates called.");
+		model.addAttribute("dates", ds.getDateList());
+		
+		return "/regularthings/listDates";
+	}
+
 	@RequestMapping(value="/addDate")
 	public String addDate(Model model) {
 
-		Date date= ds.addDate();
+		FixedDate date= ds.addDate();
 		
 		return "redirect:/editDate/" + date.getId();
 	}
+	
 	@RequestMapping(value="/deleteDate/{id}")
-	public String deleteDate(@PathVariable(value="id") int id, Model model) {
+	public String deleteDate(@PathVariable int id, Model model) {
 
 		ds.deleteDate(id);
 		
-		model.addAttribute("entries", ds.getDateList());
+		model.addAttribute("dates", ds.getDateList());
 		
 		return "regularthings/listDates";
 	}
+	
 	@RequestMapping(value="/editDate/{id}")
-	public String editDate(@PathVariable(value="id") int id, Model model) {
+	public String editDate(@PathVariable int id, Model model) {
 		
-		Date date = (Date)ds.getDate(id);
+		FixedDate date = (FixedDate)ds.getDate(id);
 		
-		model.addAttribute("date", date);
+		model.addAttribute("fixedDate", date);
 	
 		
 		return "/regularthings/editDate";
 	}
+	
 	@RequestMapping(value="/updateDate", method = RequestMethod.POST)
-	public String updateDate(@ModelAttribute Date date) {
+	public String updateDate(@ModelAttribute(value="date") FixedDate date) {
+		System.out.println("updateDate called");
 
 		ds.updateDate(date);
 		

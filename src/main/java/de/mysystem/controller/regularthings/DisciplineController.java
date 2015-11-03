@@ -1,16 +1,30 @@
 package de.mysystem.controller.regularthings;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-public class DisciplineController  {
+
+@Controller
+public class DisciplineController {
 
 	@Autowired
 	DisciplineService ds;
+    
+	
+	@RequestMapping(value="/listDisciplines")
+	public String listDisciplines(Model model) {
+		System.out.println("listDisciplines called.");
+		model.addAttribute("disciplines", ds.getDisciplineList());
+		
+		return "/regularthings/listDisciplines";
+	}
+
+
     
 	@RequestMapping(value="/addDiscipline")
 	public String addDiscipline(Model model) {
@@ -20,7 +34,7 @@ public class DisciplineController  {
 		return "redirect:/editDiscipline/" + discipline.getId();
 	}
 	@RequestMapping(value="/deleteDiscipline/{id}")
-	public String deleteDiscipline(@PathVariable(value="id") int id, Model model) {
+	public String deleteDiscipline(@PathVariable int id, Model model) {
 
 		ds.deleteDiscipline(id);
 		
@@ -30,7 +44,7 @@ public class DisciplineController  {
 	}
 
 	@RequestMapping(value="/editDiscipline/{id}")
-	public String editDiscipline(@PathVariable(value="id") int id, Model model) {
+	public String editDiscipline(@PathVariable int id, Model model) {
 		
 		Discipline discipline = (Discipline)ds.getDiscipline(id);
 		
@@ -40,9 +54,8 @@ public class DisciplineController  {
 		return "/regularthings/editDiscipline";
 	}
 
-	@RequestMapping(value="/updisciplineDiscipline", method = RequestMethod.POST)
+	@RequestMapping(value="/updateDiscipline", method = RequestMethod.POST)
 	public String updisciplineDiscipline(@ModelAttribute Discipline discipline) {
-		
 		ds.updateDiscipline(discipline);
 		
 		return "redirect:/listDisciplines";

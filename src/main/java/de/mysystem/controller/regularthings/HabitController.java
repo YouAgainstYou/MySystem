@@ -1,33 +1,36 @@
 package de.mysystem.controller.regularthings;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import de.mysystem.controller.journal.JournalEntry;
-import de.mysystem.controller.journal.JournalService;
-import de.mysystem.controller.journal.Lesson;
 
+@Controller
 public class HabitController  {
 
+	@Autowired
 	HabitService hs;
+	
+	
+	@RequestMapping(value="/listHabits")
+	public String listHabits(Model model) {
+		System.out.println("listHabits called.");
+		model.addAttribute("habits", hs.getHabitList());
+		
+		return "/regularthings/listHabits";
+	}
+
     
 	@RequestMapping(value="/addHabit")
 	public String addHabit(Model model) {
 
 		Habit habit= hs.addHabit();
 		
-		return "redirect:/editDiscipline/" + habit.getId();
+		return "redirect:/editHabit/" + habit.getId();
 	}
 	@RequestMapping(value="/deleteHabit/{id}")
 	public String deleteHabit(@PathVariable int id, Model model) {
@@ -52,9 +55,9 @@ public class HabitController  {
 
 	@RequestMapping(value="/updateHabit", method = RequestMethod.POST)
 	public String updateHabit(@ModelAttribute Habit habit) {
-		
+
 		hs.updateHabit(habit);
-		
+				
 		return "redirect:/listHabits";
 	}
 

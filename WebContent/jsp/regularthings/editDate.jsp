@@ -15,15 +15,20 @@
 <script src="<c:url value='/'/>resources/modernizr.js"></script>
 <script src="<c:url value='/'/>resources/jquery.js"></script>
 
+
 </head>
 
 <body>
-	<form:form commandName="issue" action="../updateIssue" method="POST">  
+	<form:form commandName="fixedDate" action="../updateDate" method="POST">  
 		<form:input path="id"/>
 		
+ 		date:<br>
+		<form:input path="date" />
+
+		time:<br>
+		<form:input path="time" /> 
+		
 		description:<br>
-		<form:input path="date" type="date" />
-		<form:input path="time"/>
 		<form:input path="description"/>
 		
 		<input type="submit" class="button" />
